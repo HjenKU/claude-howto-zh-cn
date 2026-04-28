@@ -271,6 +271,7 @@
   "ignoreRegExpList": [
     "[\\u4E00-\\u9FFF]+",
     "code\\{[^}]*\\}",
+    "`[^`]*`",
     "```[\\s\\S]*?```"
   ],
   "overrides": [

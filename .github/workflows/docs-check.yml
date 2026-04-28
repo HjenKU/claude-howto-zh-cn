@@ -187,17 +187,20 @@ jobs:
               with open(readme_path) as f:
                   content = f.read()
 
-              required_sections = [
-                  "## Table of Contents",
-                  "## Contributing",
-                  "## License",
-              ]
+              required_sections = {
+                  "table of contents": ["## Table of Contents", "## 目录"],
+                  "contributing": ["## Contributing", "## 参与贡献"],
+                  "license": ["## License", "## 许可证"],
+              }
 
-              for section in required_sections:
-                  if section not in content:
-                      errors.append(f"README.md: Missing '{section}' section")
+              for label, aliases in required_sections.items():
+                  if not any(section in content for section in aliases):
+                      errors.append(
+                          f"README.md: Missing '{label}' section "
+                          f"(accepted headings: {', '.join(aliases)})"
+                      )
                   else:
-                      print(f"✅ README.md has '{section}' section")
+                      print(f"✅ README.md has '{label}' section")
 
           # Check for broken relative links
           md_files = list(Path(".").rglob("*.md"))

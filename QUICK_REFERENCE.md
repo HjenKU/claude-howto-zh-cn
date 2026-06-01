@@ -105,7 +105,10 @@ chmod +x ~/.claude/hooks/*.sh
 # 额外用量配置
 /usage-credits       # `/extra-usage` 仍可作为兼容 alias（别名）
 /usage               # v2.1.149+ 成本视图会按类别拆分
-/code-review high    # v2.1.146+，由旧 `/simplify` 改名而来
+/code-review high    # 正确性缺陷审查
+/simplify            # 清理型审查并应用修复，不负责找 bug
+/reload-skills       # 重新扫描 skill 目录
+/workflows           # 查看 dynamic workflows
 
 # 常见 permission mode
 claude --permission-mode default

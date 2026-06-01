@@ -20,13 +20,14 @@
 
 ## 最近同步
 
-- **最近同步日期**：2026-05-27
-- **本轮参考范围**：`46941a3` -> `c726139`
+- **最近同步日期**：2026-06-01
+- **本轮参考范围**：`c726139` -> `e30220c`
 - **本次同步内容**：
-  - 同步 Claude Code `v2.1.150` 相关口径：`/simplify` 已改名为 `/code-review`，旧名不再作为 alias（别名）使用
-  - 将本仓库示例 skill 从 `03-skills/code-review/` 改为 `03-skills/code-review-specialist/`，避免遮蔽新版内置 `/code-review`
-  - 补充 `/usage` 按类别拆分成本、`claude agents` 里 `Ctrl+T` 固定 session、GFM 任务清单复选框渲染和 `allowAllClaudeAiMcps`
-  - 移除上一轮记录的 Stop / SubagentStop `background_tasks`、`session_crons` 字段说明；它们未出现在当前官方 hooks reference 中
+  - 同步 Claude Code `v2.1.156` 与 Claude Opus `4.8` 相关口径，更新 `/effort`、Fast Mode 和模型说明
+  - 修正 `/model` 默认行为：现在默认保存为后续 session 默认值，按 `s` 才只作用于当前 session
+  - 补充 `/reload-skills`、`/workflows`、`disallowed-tools`、`MessageDisplay`、`reloadSkills`、`sessionTitle`、`COLUMNS` / `LINES`
+  - 修正 settings 优先级链：managed policy -> `.claude/settings.local.json` -> `.claude/settings.json` -> `~/.claude/settings.json`
+  - 更新 `/simplify` 口径：它在 `v2.1.154` 后重新成为独立的清理型命令，不再等同于 `/code-review`
 
 ---
 

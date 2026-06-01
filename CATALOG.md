@@ -18,10 +18,10 @@
 |------|----------|----------|------------|------|
 | Slash Commands | 60+ | 8 | 非常适合 | [01-slash-commands/](01-slash-commands/) |
 | Memory | 7 类 | 3 | 非常适合 | [02-memory/](02-memory/) |
-| Skills | 9 个 bundled skills + 示例 | 多个 | 适合进阶 | [03-skills/](03-skills/) |
+| Skills | 10 个 bundled skills + 示例 | 多个 | 适合进阶 | [03-skills/](03-skills/) |
 | Subagents | 6 个内建 | 多个 | 适合进阶 | [04-subagents/](04-subagents/) |
 | MCP | 1 个内建生态入口 + 示例 | 多个 | 适合集成场景 | [05-mcp/](05-mcp/) |
-| Hooks | 29 个事件 | 9 | 适合自动化 | [06-hooks/](06-hooks/) |
+| Hooks | 30 个事件 | 9 | 适合自动化 | [06-hooks/](06-hooks/) |
 | Plugins | - | 3 | 适合团队级方案 | [07-plugins/](07-plugins/) |
 | Checkpoints | 内建 | 示例文档 | 新手必学 | [08-checkpoints/](08-checkpoints/) |
 | Advanced Features | 多项 | 示例文档 | 高阶再学 | [09-advanced-features/](09-advanced-features/) |
@@ -57,6 +57,8 @@ slash commands 是用户在 Claude Code 里主动输入的快捷操作，例如 
 | `/ultraplan` | 把计划起草交给浏览器里的云端会话 |
 | `/ultrareview` | 云端多代理代码审查 |
 | `/less-permission-prompts` | 分析调用记录并建议 allowlist |
+| `/reload-skills` | 重新扫描 skill 目录，不需要重启 session |
+| `/workflows` | 查看正在运行和已完成的 dynamic workflows |
 | `/usage` | 查看 plan 用量、限流状态和成本；`v2.1.149+` 起成本视图会按 skills、subagents、plugins、MCP server 等类别拆分 |
 | `/usage-credits` | 配置额外用量额度；`/extra-usage` 仍可作为 alias（别名）使用 |
 | `/branch` | 从当前对话分叉（某些版本中 `/fork` 仍可能可用） |
@@ -149,7 +151,8 @@ skills 是 Claude Code 会根据描述自动触发的复用能力。它们往往
 | `/loop` | 按间隔重复执行 prompt |
 | `/run` | 启动当前项目，实际看改动是否跑起来 |
 | `/run-skill-generator` | 为项目生成 `/run` / `/verify` 所需的运行技能 |
-| `/code-review [effort]` | 审查当前 diff 的正确性缺陷；`v2.1.146` 起由 `/simplify` 改名而来，旧名不再作为 alias（别名） |
+| `/code-review [effort]` | 审查当前 diff 的正确性缺陷，可传入 `/code-review high` |
+| `/simplify` | 做复用、简化、效率和抽象层级相关的清理型审查，并应用修复；不负责找 bug |
 | `/verify` | 构建、运行并观察应用，确认修复真的有效 |
 
 ### skill 结构
@@ -311,7 +314,11 @@ memory 是 Claude Code 用来长期加载规则和上下文的机制。
 - `/run`
 - `/verify`
 - `/run-skill-generator`
+- `/reload-skills`
+- `/workflows`
 - `claude agents --json`
+- `/model` 默认保存为后续 session 默认值；按 `s` 才只作用于当前 session
+- Opus 4.8 默认 effort 是 `high`
 - `claude agents` 里用 `Ctrl+T` 固定后台 session
 - `/usage` 按 skills、subagents、plugins、MCP server 等类别拆分成本
 - GFM 任务清单复选框（`- [ ]` / `- [x]`）渲染

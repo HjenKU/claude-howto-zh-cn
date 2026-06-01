@@ -5,7 +5,7 @@
 - 上游仓库：[`luongnv89/claude-howto`](https://github.com/luongnv89/claude-howto)
 - 上游分支：`main`
 - 本地化基线 commit：`0ca8c37c81918458e063739425c4740ca92c2db2`
-- 最近检查到的上游 commit：`c7261394b0719ae12246e8212768100dbdedecd0`
+- 最近检查到的上游 commit：`e30220c70f721a3978efce5f0aa86cbade581d71`
 - 上游许可证：[MIT License](LICENSE)
 
 ## 本仓库性质
@@ -61,6 +61,24 @@ uv run python scripts/validate_localization.py
    - 哪些内容暂时未同步
 
 ## 最近一次同步记录
+
+### 上游同步 — 2026-06-01
+
+- Reviewed upstream range: `c726139` → `e30220c`
+- 重点上游变化：
+  - Claude Code 教程覆盖更新到 `v2.1.156`，并切到 Claude Opus `4.8` 口径
+  - `/model` 默认行为改为保存为后续 session 默认值；按 `s` 才只作用于当前 session
+  - Opus 4.8 默认 effort 是 `high`；`xhigh` 支持 Opus 4.8 / 4.7，`max` 支持 Opus 4.8 / 4.7 / 4.6 和 Sonnet 4.6；Haiku 4.5 不支持 effort levels
+  - Fast Mode 默认切到 Opus 4.8，`CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE` 已弃用并在 2026-06-01 移除
+  - `/simplify` 在 `v2.1.154` 后重新成为独立的清理型命令；`/code-review` 继续用于正确性缺陷审查
+  - 新增 `/reload-skills`、`/workflows`、dynamic workflows、skill `disallowed-tools`、SessionStart `reloadSkills` / `sessionTitle`
+  - hooks 事件数更新为 30，新增 `MessageDisplay`；status-line 命令脚本会收到 `COLUMNS` 和 `LINES`
+  - 修正 settings 优先级链：managed policy -> `.claude/settings.local.json` -> `.claude/settings.json` -> `~/.claude/settings.json`
+- Chinese fork actions:
+  - 将模型、命令、settings、skills、hooks 和 workflow 行为变化同步进中文主线文档
+  - 保留 `/model`、`/effort`、`/reload-skills`、`/workflows`、`disallowed-tools`、`reloadSkills`、`sessionTitle`、`MessageDisplay`、`COLUMNS`、`LINES` 等可执行标识原文
+  - 不引入上游英文根 README 或额外多语言目录改动，继续维护 `lhfer/claude-howto-zh-cn` 的中文默认入口
+  - 更新 `README.md`、`UPSTREAM.md` 和 `CHANGELOG.md` 的最近同步记录
 
 ### 上游同步 — 2026-05-27
 

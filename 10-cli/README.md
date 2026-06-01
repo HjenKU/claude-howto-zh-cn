@@ -81,7 +81,7 @@ cat error.log | claude -p "explain this error"
 | `-n, --name` | 给 session 起名 |
 | `-w, --worktree` | 在 worktree 中启动 |
 | `--model` | 指定模型 |
-| `--effort` | 指定思考强度；现在支持 `xhigh` |
+| `--effort` | 指定思考强度；Opus 4.8 默认 `high`，也支持 `xhigh` / `max` |
 | `--permission-mode` | 指定权限模式 |
 | `--bare` | 以最小模式启动 |
 | `--add-dir` | 加额外目录到工作上下文 |
@@ -146,8 +146,11 @@ claude --append-system-prompt "Always explain tradeoffs" "review this plan"
 
 ### 这轮 CLI / 平台更新里值得知道的变化
 
-- Opus 主线已经切到 **Opus 4.7**
-- `--effort` 新增 `xhigh`，并成为 Opus 4.7 的默认档位
+- Opus 主线已经切到 **Opus 4.8**
+- Opus 4.8 默认 effort 是 `high`；`xhigh` 适用于 Opus 4.8 / 4.7，`max` 适用于 Opus 4.8 / 4.7 / 4.6 和 Sonnet 4.6
+- `/model` 现在默认保存为后续 session 默认值；如果只想作用于当前 session，选中后按 `s`
+- Fast Mode 默认切到 Opus 4.8；`CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE` 已弃用并在 2026-06-01 移除
+- 新增 `/reload-skills` 和 `/workflows`，分别用于重扫 skills 和查看 dynamic workflows
 - Windows 侧正在逐步拿到更专门的 PowerShell tool
 - 主题里新增了更贴近终端外观的 Auto 模式
 - 只读型 Bash / Glob 调用的权限提示比以前更安静
@@ -362,7 +365,7 @@ claude ultrareview 1234 --json > review.json
 
 ## 新增环境变量
 
-这轮 CLI 相关更新里，有两个环境变量对自动化和云厂商部署比较有用：
+这轮 CLI 相关更新里，下面这些环境变量对自动化、云厂商部署和模型行为排查比较有用：
 
 | 环境变量 | 用途 |
 |----------|------|
@@ -371,6 +374,7 @@ claude ultrareview 1234 --json > review.json
 | `CLAUDE_CODE_FORCE_SYNC_OUTPUT` | 在终端能力自动检测失误时强制同步输出，例如 Emacs `eat` |
 | `CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE` | 为 Homebrew / WinGet 安装启用后台升级 |
 | `CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY` | 在设置了 `ANTHROPIC_BASE_URL` 时，显式开启 `/v1/models` 网关发现 |
+| `CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE` | 已弃用并在 2026-06-01 移除；如果仍想让 Opus 4.6 走 fast mode，先 `/model claude-opus-4-6[1m]`，再 `/fast on` |
 | `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN` | 设为 `1` 后，停留在普通终端滚动历史里，而不是 fullscreen alternate-screen 渲染 |
 | `CLAUDE_CODE_SESSION_ID` | 每个 Bash tool 子进程都会带上这个 session UUID，可用来和 hooks / telemetry 对日志 |
 | `CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL` | 在 OTEL 环境下重新打开 Anthropic 的会话质量问卷 |

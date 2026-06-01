@@ -37,8 +37,8 @@ Claude Code 里的 slash commands 大致分四类：
 | `/clear` | 清空当前会话 |
 | `/config` | 查看或编辑设置 |
 | `/context` | 看上下文使用情况 |
-| `/model` | 切换模型；`v2.1.144+` 起默认只影响当前 session，选择后按 `d` 才设为后续默认 |
-| `/effort [low|medium|high|xhigh|max|auto]` | 用交互滑杆调整思考强度；Opus 4.7 默认是 `xhigh` |
+| `/model` | 切换模型；`v2.1.153+` 起默认保存为后续 session 默认值，选择后按 `s` 才只作用于当前 session |
+| `/effort [low|medium|high|xhigh|max|auto]` | 用交互滑杆调整思考强度；Opus 4.8 默认是 `high`，`xhigh` 适用于 Opus 4.8 / 4.7 |
 | `/agents` | 查看可用 agents |
 | `/skills` | 查看可用 skills |
 | `/hooks` | 查看 hooks |
@@ -48,7 +48,7 @@ Claude Code 里的 slash commands 大致分四类：
 | `/focus` | 切换 focus view，减少长任务时的视觉干扰 |
 | `/goal <目标>` | 给当前 session 注册一个持续追踪的完成目标 |
 | `/less-permission-prompts` | 分析常见 Bash / MCP 调用，帮你生成更合理的 allowlist |
-| `/code-review [effort]` | 审查当前 diff 的正确性缺陷；`v2.1.146` 起由 `/simplify` 改名而来，旧名不再作为 alias（别名） |
+| `/code-review [effort]` | 审查当前 diff 的正确性缺陷；可传入 `/code-review high` 这类 effort 参数 |
 | `/proactive` | `/loop` 的别名 |
 | `/recap` | 回来继续 session 时，快速看一眼刚刚做了什么 |
 | `/sandbox` | 切换 sandbox 模式 |
@@ -56,6 +56,8 @@ Claude Code 里的 slash commands 大致分四类：
 | `/rewind` | 回退到 checkpoint |
 | `/undo` | `/rewind` 的别名 |
 | `/resume` | 恢复以前的 session |
+| `/reload-skills` | 重新扫描 skill 目录，不需要重启当前 session |
+| `/workflows` | 查看正在运行和已完成的 dynamic workflows |
 | `/scroll-speed <+N|-N>` | 调整 TUI live preview 的鼠标滚轮滚动速度 |
 | `/team-onboarding` | 生成一份适合新同事的 Claude Code 上手说明 |
 | `/tui` | 切换全屏 TUI（Text User Interface）模式 |
@@ -167,8 +169,9 @@ cp 01-slash-commands/optimize.md .claude/commands/
 - `/proactive` 新增，作为 `/loop` 的别名
 - `/ultrareview` 新增，用云端多代理做综合代码审查
 - `/less-permission-prompts` 新增，会分析常见 Bash / MCP 调用并帮你减少重复权限提示
-- `/effort` 现在多了 `xhigh`，在 Opus 4.7 上成为默认档位
-- Max 用户在 Opus 4.7 上使用 Auto Mode 时，不再强依赖 `--enable-auto-mode`
+- `/effort` 在 Opus 4.8 上默认是 `high`；`xhigh` 适用于 Opus 4.8 / 4.7，`max` 适用于 Opus 4.8 / 4.7 / 4.6 和 Sonnet 4.6
+- `ultracode` 不是模型 effort level；它会发送 `xhigh` 并让 Claude 编排 dynamic workflows
+- Max 用户在 Opus 4.7+ 上使用 Auto Mode 时，不再强依赖 `--enable-auto-mode`
 - `/team-onboarding` 新增，适合自动生成团队上手说明
 - `/ultraplan` 新增，适合端到端计划工作流
 - `/schedule` 更偏向 Cloud scheduled tasks，不再只是本地提醒
@@ -176,7 +179,10 @@ cp 01-slash-commands/optimize.md .claude/commands/
 - `/goal` 新增，会把“这轮什么时候算完成”变成一个显式的 session 目标
 - `/scroll-speed` 新增，用来调 TUI live preview 的滚动速度，设置会按机器持久化
 - `/usage-credits` 成为额外用量配置的主名称；旧的 `/extra-usage` 仍然能用，但新文档建议写新名字
-- `/model` 现在默认只改当前 session 的模型；如果想设成以后新 session 的默认模型，选中后要按 `d`
+- `/model` 现在默认保存为后续 session 默认值；如果只想影响当前 session，选中后要按 `s`
+- `/reload-skills` 新增，用来重新扫描 skill 目录
+- `/workflows` 新增，用来查看 dynamic workflows 的运行记录
+- `/simplify` 在 `v2.1.154+` 后重新成为独立的清理型命令；如果要找正确性缺陷，仍然用 `/code-review`
 
 ---
 

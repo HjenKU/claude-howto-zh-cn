@@ -21,7 +21,10 @@
 | `/run` / `/verify` | bundled skills，用于启动项目并确认改动真实可用 | [Skills Guide](03-skills/) |
 | `/run-skill-generator` | 为项目生成专属 run / verify skill | [Skills Guide](03-skills/) |
 | `claude agents --json` | 输出机器可读的 Agent View 列表 | [CLI Guide](10-cli/) |
-| `/code-review [effort]` | 内置审查命令；`v2.1.146` 起由 `/simplify` 改名而来，旧名不再作为 alias（别名） | [Skills Guide](03-skills/) |
+| `/code-review [effort]` | 内置正确性缺陷审查命令，可传入 `/code-review high` | [Skills Guide](03-skills/) |
+| `/simplify` | 清理型审查命令，关注复用、简化、效率和抽象层级 | [Skills Guide](03-skills/) |
+| `/reload-skills` | 重新扫描 skill 目录，不需要重启当前 session | [Skills Guide](03-skills/) |
+| `/workflows` | 查看 dynamic workflows 的运行记录 | [Advanced Features](09-advanced-features/) |
 | `claude agents` 里的 `Ctrl+T` | 固定后台 session，空闲时优先保留 | [CLI Guide](10-cli/) |
 | `allowAllClaudeAiMcps` | 组织级允许加载 claude.ai 云端 MCP connectors 的托管设置 | [MCP Guide](05-mcp/) |
 

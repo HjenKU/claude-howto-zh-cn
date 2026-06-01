@@ -2,6 +2,28 @@
 
 > 本文件保留上游版本信息的时间顺序，但用中文补充阅读说明，方便中文用户快速判断“这个仓库最近同步了什么”。
 
+## 中文版同步 — 2026-06-01
+
+### 上游审阅
+
+- 核对上游范围：`c726139` → `e30220c`
+- 上游这轮重点：
+  - 同步 Claude Code `v2.1.156` 与 Claude Opus `4.8`
+  - `/model` 默认行为改为“保存为后续 session 默认值”；选中后按 `s` 才只作用于当前 session
+  - Opus 4.8 默认 effort 为 `high`；`xhigh` 支持 Opus 4.8 / 4.7，`max` 支持 Opus 4.8 / 4.7 / 4.6 和 Sonnet 4.6；Haiku 4.5 不支持 effort levels
+  - Fast Mode 默认切到 Opus 4.8；`CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE` 已弃用并在 2026-06-01 移除
+  - `/simplify` 在 `v2.1.154` 后重新成为独立的清理型命令；`/code-review` 继续负责正确性缺陷审查
+  - 新增 `/reload-skills`、`/workflows`、dynamic workflows、skill `disallowed-tools`、SessionStart `reloadSkills` / `sessionTitle`
+  - hooks 事件数更新为 30，新增 `MessageDisplay`；status-line 命令脚本会收到 `COLUMNS` 和 `LINES`
+  - 修正 settings 优先级链：managed policy -> `.claude/settings.local.json` -> `.claude/settings.json` -> `~/.claude/settings.json`
+
+### 中文 fork 处理
+
+- 将影响真实操作的模型、命令、settings、skills、hooks 和 workflow 行为改写成中文说明
+- 保留 `/model`、`/effort`、`/reload-skills`、`/workflows`、`disallowed-tools`、`reloadSkills`、`sessionTitle`、`MessageDisplay`、`COLUMNS`、`LINES` 等可执行标识原文
+- 继续保持根目录 `README.md` 为中文入口，不引入上游英文 README 或额外多语言目录树
+- 更新 `README.md`、`UPSTREAM.md` 和 `CHANGELOG.md` 的最近同步记录
+
 ## 中文版同步 — 2026-05-27
 
 ### 上游审阅
